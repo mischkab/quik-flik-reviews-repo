@@ -22,8 +22,10 @@ RSpec.describe "Movies", type: :request do
       get "/movies/#{Movie.first.id}"
 
       expect(response.body).to include_json({
-        'title':'Finding Nemo',
-        'director':'Andrew Stanton'
+        id: a_kind_of(Integer),
+        overview: 'A timid clownfish sets out on a journey to bring his son home.',
+        title:'Finding Nemo',
+        director:'Andrew Stanton'
       })
     end
 
@@ -31,9 +33,37 @@ RSpec.describe "Movies", type: :request do
       get "/movies/#{Movie.second.id}"
 
       expect(response.body).to include_json({
-        'title':'Godzilla vs. Kong',
-        "director":'Adam Wingard'
+        id: a_kind_of(Integer),
+        overview: 'The fearsome Godzilla and the mighty Kong--with humanity caught in the balance.',
+        title:'Godzilla vs. Kong',
+        director:'Adam Wingard'
       })
+    end
+  end
+
+  describe "POST /movies" do
+    let!(:movie_params) { { title: 'The Lion King', overview: 'Lion prince Simba and his father are targeted by his bitter uncle, who wants to ascend the throne himself.', director: 'Rob Minkoff, Roger Allers', image: 'http://www.impawards.com/1994/posters/lion_king_ver4.jpg' } }
+
+    it 'creates a new movie' do
+      expect { post '/movies', params: movie_params }.to change(Movie, :count).by(1)
+    end
+
+    it 'returns the movie data' do
+      post '/movies', params: movie_params
+
+      expect(response.body).to include_json({
+        id: a_kind_of(Integer),
+        title: 'The Lion King', 
+        overview: 'Lion prince Simba and his father are targeted by his bitter uncle, who wants to ascend the throne himself.', 
+        director: 'Rob Minkoff, Roger Allers', 
+        image: 'http://www.impawards.com/1994/posters/lion_king_ver4.jpg'
+      })
+    end
+
+    it 'returns a status code of 201 (created)' do
+      post '/movies', params: movie_params
+
+      expect(response).to have_http_status(:created)
     end
   end
 end
