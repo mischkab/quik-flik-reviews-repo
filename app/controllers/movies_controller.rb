@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
-rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
   # GET /movies
   def index
@@ -14,14 +15,14 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
   # POST /movies
   def create
-    movie = Movie.create(movie_params)
+    movie = Movie.create!(movie_params)
     render json: movie, status: :created
   end
 
   # PATCH /movies/:id
   def update
     movie = find_movie
-    movie.update(movie_params)
+    movie.update!(movie_params)
     render json: movie, status: :accepted
   end
 
@@ -44,5 +45,9 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
   def render_not_found_response
     render json: { error: 'Movie not found' }, status: :not_found
+  end
+
+  def render_unprocessable_entity(invalid)
+    render json: { error: invalid.record.errors.full_messages }, status: :unprocessable_entity
   end
 end
