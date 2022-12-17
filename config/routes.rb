@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   # resources :reviews
-  resources :movies, only: [:index, :show, :create, :update]
+  resources :movies, only: [:index, :show, :create, :update, :destroy]
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

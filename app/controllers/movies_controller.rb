@@ -29,6 +29,18 @@ class MoviesController < ApplicationController
     end
   end
 
+  def destroy
+    #find
+    movie = Movie.find_by(id: params[:id])
+    if movie
+      #delete
+      movie.destroy
+      head :no_content
+    else
+      render json: { error: 'Movie not found' }, status: :not_found
+    end
+  end
+
   private
 
   def movie_params
