@@ -96,6 +96,8 @@ RSpec.describe "Movies", type: :request do
       movie = Movie.create(title: 'The Lion King', overview: 'Lion prince Simba and his father are targeted by his bitter uncle, who wants to ascend the throne himself.', director: 'Rob Minkoff, Roger Allers', image: 'http://www.impawards.com/1994/posters/lion_king_ver4.jpg')
 
       expect { delete "/movies/#{movie.id}" }.to change(Movie, :count).from(3).to(2)
+
+      expect(response).to have_http_status(:no_content)
     end
   end
 end
