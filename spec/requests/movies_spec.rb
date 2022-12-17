@@ -66,4 +66,36 @@ RSpec.describe "Movies", type: :request do
       expect(response).to have_http_status(:created)
     end
   end
+
+  describe "PATCH /movies/:id" do
+    it 'updates the movie with the matching id' do
+      movie = Movie.create(title: 'The Lion King', overview: 'Lion prince Simba and his father are targeted by his bitter uncle, who wants to ascend the throne himself.', director: 'Rob Minkoff, Roger Allers', image: 'http://www.impawards.com/1994/posters/lion_king_ver4.jpg')
+
+      patch "/movies/#{movie.id}", params: { overview: 'As a cub, Simba is forced to leave the Pride Lands after his father Mufasa is murdered by his wicked uncle, Scar. Years later, he returns as a young lion to reclaim his throne.' }
+      
+      expect(movie.reload.overview).to eq('As a cub, Simba is forced to leave the Pride Lands after his father Mufasa is murdered by his wicked uncle, Scar. Years later, he returns as a young lion to reclaim his throne.')
+    end
+
+    it 'returns the movie data' do
+      movie = Movie.create(title: 'The Lion King', overview: 'Lion prince Simba and his father are targeted by his bitter uncle, who wants to ascend the throne himself.', director: 'Rob Minkoff, Roger Allers', image: 'http://www.impawards.com/1994/posters/lion_king_ver4.jpg')
+
+      patch "/movies/#{movie.id}", params: { overview: 'As a cub, Simba is forced to leave the Pride Lands after his father Mufasa is murdered by his wicked uncle, Scar. Years later, he returns as a young lion to reclaim his throne.' }
+
+      expect(response.body).to include_json({
+        id: a_kind_of(Integer),
+        title: 'The Lion King',
+        overview: 'As a cub, Simba is forced to leave the Pride Lands after his father Mufasa is murdered by his wicked uncle, Scar. Years later, he returns as a young lion to reclaim his throne.',
+        director: 'Rob Minkoff, Roger Allers',
+        image: 'http://www.impawards.com/1994/posters/lion_king_ver4.jpg'
+      })
+    end
+  end
+
+  describe 'DELETE /movies/:id' do
+    it 'deletes the movie with the matching id' do
+      movie = Movie.create(title: 'The Lion King', overview: 'Lion prince Simba and his father are targeted by his bitter uncle, who wants to ascend the throne himself.', director: 'Rob Minkoff, Roger Allers', image: 'http://www.impawards.com/1994/posters/lion_king_ver4.jpg')
+
+      expect { delete "/movies/#{movie.id}" }.to change(Movie, :count).from(3).to(2)
+    end
+  end
 end
