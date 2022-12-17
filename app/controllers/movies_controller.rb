@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
   # GET /movies/:id
   def show
     movie = find_movie
-    render json: movie, status: :ok
+    render json: movie, include: :reviews, status: :ok
   end
 
   # POST /movies
