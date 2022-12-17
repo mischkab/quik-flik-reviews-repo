@@ -33,24 +33,24 @@ Review.create!([
     title: "You're not a movie buff if you haven't watched this!",
     comment: "If anyone tries to tell you that they're a movie buff but they've never seen the Godfather, they're lying! And if they say it's bad then they haven't watched it! Period.",
     rating: 5,
-    movie_id: 1
+    movie:Movie.all.sample
   },
   {
-    title: "The godfather of mafia movies",
-    comment: "They've all tried but they can't succeed. This is still the Godfather of all mafia movies. See what I did there? ;)",
+    title: "This movie is the G.O.A.T",
+    comment: "They've all tried but they can't succeed. This movie is by far the G.O.A.T when it comes to acting.",
     rating: 5,
-    movie_id: 1
+    movie:Movie.all.sample
   },
   {
     title: "I don't understand the hype",
     comment: "Don't get me wrong, this movie is good but it's not great. I was a little underwhelmed after reading the reviews and hearing people always quote it.",
     rating: 3,
-    movie_id: 1
+    movie:Movie.all.sample
   },
   {
-    title: "Miles Teller is gonna be big. You heard it here first",
+    title: "The next Brad Pitt. You heard it here first",
     comment: "Picked this movie randomly on my long haul flight and I was pleasantly surprised. I have only ever seen Miles Teller in teen movies like the Fault in Our Starts but he's even better in serious roles!",
     rating: 5,
-    movie_id: 4
+    movie:Movie.all.sample
   }
 ])
