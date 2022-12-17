@@ -28,29 +28,35 @@ Movie.create!([
   }
 ])
 
+10.times{User.create!(username: Faker::Internet.username(specifier: 5..10), password: Faker::Internet.password(min_length: 8), email: Faker::Internet.email)}
+
 Review.create!([
   {
     title: "You're not a movie buff if you haven't watched this!",
     comment: "If anyone tries to tell you that they're a movie buff but they've never seen the Godfather, they're lying! And if they say it's bad then they haven't watched it! Period.",
     rating: 5,
-    movie:Movie.all.sample
+    movie:Movie.all.sample,
+    user:User.all.sample
   },
   {
     title: "This movie is the G.O.A.T",
     comment: "They've all tried but they can't succeed. This movie is by far the G.O.A.T when it comes to acting.",
     rating: 5,
-    movie:Movie.all.sample
+    movie:Movie.all.sample,
+    user:User.all.sample
   },
   {
     title: "I don't understand the hype",
     comment: "Don't get me wrong, this movie is good but it's not great. I was a little underwhelmed after reading the reviews and hearing people always quote it.",
     rating: 3,
-    movie:Movie.all.sample
+    movie:Movie.all.sample,
+    user:User.all.sample
   },
   {
     title: "The next Brad Pitt. You heard it here first",
     comment: "Picked this movie randomly on my long haul flight and I was pleasantly surprised. I have only ever seen Miles Teller in teen movies like the Fault in Our Starts but he's even better in serious roles!",
     rating: 5,
-    movie:Movie.all.sample
+    movie:Movie.all.sample,
+    user:User.all.sample
   }
 ])
