@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
+  skip_before_action :authorized, only: [:index, :show]
   before_action :find_movie
   before_action :find_review, only: [:show, :update, :destroy]
 
@@ -21,7 +22,7 @@ class ReviewsController < ApplicationController
     render json: review, status: :created
   end
 
-    # PATCH /movies/:movie_id/reviews
+  # PATCH /movies/:movie_id/reviews
   def update
     @review.update!(review_params)
     render json: @review, status: :accepted
