@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
-  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
+  before_action :find_movie, only: [:show, :update, :destroy]
 
   # GET /movies
   def index
@@ -9,8 +9,7 @@ class MoviesController < ApplicationController
 
   # GET /movies/:id
   def show
-    movie = find_movie
-    render json: movie, include: :reviews, status: :ok
+    render json: @movie, include: :reviews, status: :ok
   end
 
   # POST /movies
@@ -21,15 +20,13 @@ class MoviesController < ApplicationController
 
   # PATCH /movies/:id
   def update
-    movie = find_movie
-    movie.update!(movie_params)
-    render json: movie, status: :accepted
+    @movie.update!(movie_params)
+    render json: @movie, status: :accepted
   end
 
   # DELETE /movies/:id
   def destroy
-    movie = find_movie
-    movie.destroy
+    @movie.destroy
     head :no_content
   end
 
@@ -40,14 +37,10 @@ class MoviesController < ApplicationController
   end
 
   def find_movie
-    Movie.find(params[:id])
+    @movie = Movie.find(params[:id])
   end
 
   def render_not_found_response
     render json: { error: 'Movie not found' }, status: :not_found
-  end
-
-  def render_unprocessable_entity(invalid)
-    render json: { error: invalid.record.errors.full_messages }, status: :unprocessable_entity
   end
 end

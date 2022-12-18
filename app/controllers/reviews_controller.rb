@@ -1,6 +1,5 @@
 class ReviewsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
-  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   skip_before_action :authorized, only: [:index, :show]
   before_action :find_movie
   before_action :find_review, only: [:show, :update, :destroy]
@@ -49,9 +48,5 @@ class ReviewsController < ApplicationController
 
   def render_not_found_response
     render json: { error: 'Review not found' }, status: :not_found
-  end
-
-  def render_unprocessable_entity(invalid)
-    render json: { error: invalid.record.errors.full_messages }, status: :unprocessable_entity
   end
 end
