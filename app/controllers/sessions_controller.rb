@@ -2,10 +2,13 @@ class SessionsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
   # login
   def create
-    byebug
     user = User.find_by!(username: params[:username])
-    session[:user_id] = user.id
-    render json: user, status: :created
+    if user.authenticate(params[:password])
+      session[:user_id] = user.id
+      render json: user, status: :created
+    else
+      render json: { error: "Password invalid" }, status: :unauthorized
+    end
   end
 
   # logout
