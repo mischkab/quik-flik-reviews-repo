@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router";
 import Movies from "./Movies/Movies";
 import Movie from "./Movie/Movie";
-import MovieForm from "./Movie/MovieForm";
+import MovieForm from "./Movies/MovieForm";
 
 
 function App() {
