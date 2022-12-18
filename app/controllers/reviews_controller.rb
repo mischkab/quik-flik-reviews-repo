@@ -47,7 +47,7 @@ class ReviewsController < ApplicationController
   end
 
   def render_not_found_response
-    render json: { error: 'Movie not found' }, status: :not_found
+    render json: { error: 'Review not found' }, status: :not_found
   end
 
   def render_unprocessable_entity(invalid)
