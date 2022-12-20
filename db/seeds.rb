@@ -6,25 +6,25 @@ Movie.create!([
     title: "The Godfather",
     overview: "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.",
     director: "Francis Ford Coppola",
-    image: "http://www.impawards.com/1972/posters/godfather_ver3.jpg"
+    image: "https://i.ibb.co/bBX4NJY/godfather-ver3.jpg"
   },
   {
     title: "The Shawshank Redemption",
     overview: "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.",
     director: "Frank Darabont",
-    image: "http://www.impawards.com/1994/posters/shawshank_redemption_ver1.jpg"
+    image: "https://i.ibb.co/GTPvw7c/shawshank-redemption-ver1.jpg"
   },
   {
     title: "The Green Mile",
     overview: "A supernatural tale set on death row in a Southern prison, where gentle giant John Coffey possesses the mysterious power to heal people's ailments. When the cell block's head guard, Paul Edgecomb, recognizes Coffey's miraculous gift, he tries desperately to help stave off the condemned man's execution.",
     director: "Frank Darabont",
-    image: "http://www.impawards.com/1999/posters/green_mile_ver3.jpg"
+    image: "https://i.ibb.co/rsP1prP/green-mile-ver3.jpg"
   },
   {
     title: "Whiplash",
     overview: "Under the direction of a ruthless instructor, a talented young drummer begins to pursue perfection at any cost, even his humanity.",
     director: "Damien Chazelle",
-    image: "http://www.impawards.com/2014/posters/whiplash_ver3.jpg"
+    image: "https://i.ibb.co/GFjwx5h/whiplash-ver3.jpg"
   }
 ])
 
