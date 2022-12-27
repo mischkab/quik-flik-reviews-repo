@@ -1,55 +1,66 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import MovieCard from './MovieCard'
+import styled from 'styled-components'
 
-const Movies = () => {
-  const [movies, setMovies] = useState([])
+const Home = styled.div`
+  text-align: center;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+`
+const Header = styled.div`
+  padding: 100px 100px 10px 100px;
 
-  const fetchMovies = async () => {
-    const { data } = await axios.get('/movies')
-
-    setMovies(data)
+  h1 {
+    font-size: 42px;
   }
+`
+const Subheader = styled.div`
+  font-weight: 300;
+  font-size: 26px;
+`
+const MovieCards = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  width: 100%;
+  padding: 20px; 
+`
+
+function Movies() {
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetchMovies()
+    fetch('/movies')
+    .then(res => res.json())
+    .then(res => {
+      console.log(res)
+      setMovies(res) 
+    })
+    .catch(res => console.log(res))
   }, [])
 
+
   return (
-    <div>
-      <span className="pageTitle">Movies</span>
-      <div className="movies">
+    <Home>
+      <Header>
+        <h1>Quik Flik Reviews</h1>
+        <Subheader>Real movie reviews by real viewers.</Subheader>
+      </Header>
+      <MovieCards>
         {movies && movies.map((c) => (
         <MovieCard 
           key={c.id} 
           id={c.id} 
-          poster={c.image} 
+          image={c.image} 
           title={c.title} 
+          director={c.director}
           />
         ))}
-      </div>
-    </div>
+      </MovieCards>
+    </Home>
   )
 }
-
-// function Movies() {
-//   const [movies, setMovies] = useState([]);
-
-//   useEffect(() => {
-//     axios.get('/movies')
-//     .then(res => {
-//       setMovies(res.data.data) 
-//     })
-//     .catch(res => console.log(res))
-//   }, [movies.length])
-
-//   const list = movies.map( item => {
-//     return (<li key={item.attributes.name}>(item.attributes.name)</li>)
-//   })
-
-//   return (
-//     <div>This is the Movies#index view for the app</div>
-//   )
-// }
 
 export default Movies; 
