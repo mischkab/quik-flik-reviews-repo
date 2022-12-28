@@ -7,7 +7,7 @@ const Home = styled.div`
   text-align: center;
   max-width: 1200px;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto; 
 `
 const Header = styled.div`
   padding: 100px 100px 10px 100px;
@@ -35,7 +35,6 @@ function Movies() {
     fetch('/movies')
     .then(res => res.json())
     .then(res => {
-      console.log(res)
       setMovies(res) 
     })
     .catch(res => console.log(res))
