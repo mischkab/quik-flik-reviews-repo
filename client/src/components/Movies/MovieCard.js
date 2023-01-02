@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {BrowserRouter as Router, Link}from 'react-router-dom'
+import {Link}from 'react-router-dom'
 
 const Card = styled.div`
   border: 1px solid #efefef;
@@ -42,17 +42,16 @@ const MovieLink = styled.div`
   }
 `
 
-const MovieCard = (props) => {
-  console.log(props)
+const MovieCard = (movie) => {
   return (
     <Card>
       <MoviePoster>
-        <img src={props.image} alt={props .title}/>
+        <img src={movie.image} alt={movie.title}/>
       </MoviePoster>
-      <MovieTitle>{props.title}</MovieTitle>
-      <MovieDirector>{props.director}</MovieDirector>
+      <MovieTitle>{movie.title}</MovieTitle>
+      <MovieDirector>{movie.director}</MovieDirector>
       <MovieLink>
-        <Link to={`/movies/${props.id}`}>View Movie</Link>
+        <Link to={`/movies/${movie.id}`}>View Movie</Link>
       </MovieLink>
     </Card>
   )

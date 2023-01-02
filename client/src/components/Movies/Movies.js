@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-// import axios from 'axios'
 import MovieCard from './MovieCard'
 import styled from 'styled-components'
 
@@ -48,13 +47,13 @@ function Movies() {
         <Subheader>Real movie reviews by real viewers.</Subheader>
       </Header>
       <MovieCards>
-        {movies && movies.map((c) => (
-        <MovieCard 
-          key={c.id} 
-          id={c.id} 
-          image={c.image} 
-          title={c.title} 
-          director={c.director}
+        {movies && movies.map((m) => (
+        <MovieCard
+          key={m.id} 
+          id={m.id}
+          image={m.image}
+          title={m.title} 
+          director={m.director}
           />
         ))}
       </MovieCards>

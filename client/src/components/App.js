@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router';
 import Movies from './Movies/Movies';
-import Movie from './Movies/Movie';
+import Movie from './Movie/Movie';
 import MovieForm from './Movies/MovieForm';
 
 
