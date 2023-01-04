@@ -1,6 +1,26 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Header from './Header'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+  margin-left: auto;
+  margin-right: right;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+`
+const Column = styled.div`
+  background: #fff;
+  height: 100vh;
+  overflow: scroll;
+
+  &:last-child {
+    background: #000;
+  }
+`
+const Main = styled.div`
+  padding-left: 50px;
+`
 
 
 const Movie = () => {
@@ -21,23 +41,25 @@ const Movie = () => {
   }, [id])
 
   return (
-  <div className='wrapper'>
-    <div className='column'>
-      { 
-        loaded && 
-        <Header 
-        id={movie.id}
-        title={movie.title}
-        overview={movie.overview}
-        director={movie.director}
-        image={movie.image}
-        reviews={movie.reviews}
-        />
-      }
-    <div className='reviews'></div>
-    </div>
-    <div className='column'>[Review form goes here.]</div>
-  </div>
+  <Wrapper>
+    <Column>
+      <Main>
+        { 
+          loaded && 
+          <Header 
+          id={movie.id}
+          title={movie.title}
+          overview={movie.overview}
+          director={movie.director}
+          image={movie.image}
+          reviews={movie.reviews}
+          />
+        }
+        <div className='reviews'></div>
+      </Main>
+    </Column>
+    <Column>[Review form goes here.]</Column>
+  </Wrapper>
   )
 }
 
