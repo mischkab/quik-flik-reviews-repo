@@ -34,7 +34,7 @@ function Movies() {
     fetch('/movies')
     .then(res => res.json())
     .then(res => {
-      setMovies(res) 
+      setMovies(res)
     })
     .catch(res => console.log(res))
   }, [])
