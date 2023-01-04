@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Fragment } from 'react'
 import { useParams } from 'react-router-dom'
 import Header from './Header'
+import ReviewForm from './ReviewForm'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
@@ -32,7 +33,6 @@ const Movie = () => {
   useEffect(() => {
     fetch(`/movies/${id}`)
     .then(res => res.json())
-    // .then(res => console.log(res))
     .then(res => {
       setMovie(res)
       setLoaded(true)
@@ -40,25 +40,47 @@ const Movie = () => {
     .catch(res => console.log(res))
   }, [id])
 
+  const handleChange = (e) => {
+    e.preventDefault()
+
+    setReview(Object.assign({}, review, {[e.target.name]: e.target.value}))
+
+    console.log('review:', review)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()  
+  }
+
   return (
   <Wrapper>
-    <Column>
-      <Main>
-        { 
-          loaded && 
-          <Header 
-          id={movie.id}
-          title={movie.title}
-          overview={movie.overview}
-          director={movie.director}
-          image={movie.image}
-          reviews={movie.reviews}
+    { 
+      loaded &&
+      <Fragment>
+        <Column>
+          <Main>
+              <Header 
+              id={movie.id}
+              title={movie.title}
+              overview={movie.overview}
+              director={movie.director}
+              image={movie.image}
+              reviews={movie.reviews}
+              />
+            <div className='reviews'></div>
+          </Main>
+        </Column>
+        <Column>
+          <ReviewForm
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            title={movie.title}
+            reviews={movie.reviews}
+            review={review}
           />
-        }
-        <div className='reviews'></div>
-      </Main>
-    </Column>
-    <Column>[Review form goes here.]</Column>
+        </Column>
+      </Fragment>
+    }
   </Wrapper>
   )
 }

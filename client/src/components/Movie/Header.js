@@ -23,18 +23,11 @@ const TotalOutOf = styled.div`
   padding: 10px 0;
 `
 
-const Header = ({
-  id,
-  title,
-  overview,
-  director,
-  image,
-  reviews
-}) => {
-  const total = reviews.length
+const Header = (m) => {
+  const total = m.reviews.length
   return (
     <Wrapper>
-      <h1> <img src={image} alt={title} /> {title}</h1>
+      <h1> <img src={m.image} alt={m.title} /> {m.title}</h1>
       <div>
         <TotalReviews>{total} {total === 1? 'User Review' : 'User Reviews'}</TotalReviews>
         <TotalOutOf>avg out of 5</TotalOutOf>
