@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import { Link } from "react-router-dom"
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const Wrapper = styled.nav`
   width: 100%;
@@ -69,9 +69,9 @@ const Navbar = () => {
           </Left>
           <Right>
             <Menu>
-              <li>Home</li>
-              <li>Login</li>
-              <li>Sign Up</li>
+              <li><Link to='/'>Home</Link></li>
+              <li><Link to='/login'>Login</Link></li>
+              <li><Link to='/register'>Sign Up</Link></li>
             </Menu>
           </Right>
         </Nav>
