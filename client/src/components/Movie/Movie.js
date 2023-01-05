@@ -49,7 +49,13 @@ const Movie = () => {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()  
+    e.preventDefault()
+
+    post(`/movies/${id}/reviews`, {review})
+    .then(res => {
+      debugger
+    })
+    .catch(res => {})
   }
 
   return (
