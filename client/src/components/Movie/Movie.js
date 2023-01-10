@@ -51,11 +51,11 @@ const Movie = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    post(`/movies/${id}/reviews`, {review})
-    .then(res => {
-      debugger
-    })
-    .catch(res => {})
+    // post(`/movies/${id}/reviews`, {review})
+    // .then(res => {
+    //   debugger
+    // })
+    // .catch(res => {})
   }
 
   return (

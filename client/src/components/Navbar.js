@@ -47,7 +47,6 @@ const Menu = styled.ul`
 `
 
 const Logo = styled.span`
-  font-family: 'Poppins-ExtraBold';
   font-weight: bold;
   font-size: 20px;
   a {
@@ -59,7 +58,15 @@ const Logo = styled.span`
   }
 `
 
-const Navbar = () => {
+const Navbar = ({user, setUser}) => {
+  function logout() {
+    fetch('/logout', { method: 'DELETE' }).then((r) => {
+      if (r.ok) {
+        setUser(null)
+      }
+    })
+  }
+
   return (
     <Wrapper>
       <Container>
@@ -70,8 +77,16 @@ const Navbar = () => {
           <Right>
             <Menu>
               <li><Link to='/'>Home</Link></li>
-              <li><Link to='/login'>Login</Link></li>
-              <li><Link to='/register'>Sign Up</Link></li>
+              {
+                !user ? (
+                  <>
+                  <li><Link to='/login'>Login</Link></li>
+                  <li><Link to='/register'>Sign Up</Link></li>
+                  </>
+                ) : (
+                  <li><Link to='/' onClick={logout}>Logout</Link></li>
+                )
+              }
             </Menu>
           </Right>
         </Nav>
