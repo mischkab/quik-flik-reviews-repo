@@ -1,7 +1,7 @@
-import { useState } from "react";
-import styled from "styled-components";
-import LoginForm from "./LoginForm";
-import Register from "./Register";
+import { useState } from 'react';
+import styled from 'styled-components';
+import LoginForm from './LoginForm';
+import Register from './Register';
 
 const LoginWrapper = styled.div``
 const FormWrapper = styled.div`
@@ -29,6 +29,11 @@ const LoginButton = styled.button`
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
 `
+const Divider = styled.hr`
+  border: none;
+  border-bottom: 1px solid #ccc;
+  margin: 16px 0;
+`;
 
 function Login({ onLogin }) {
   const [showLogin, setShowLogin] = useState(true);
@@ -44,7 +49,7 @@ function Login({ onLogin }) {
               <Divider />
               <p>
                 Don't have an account? &nbsp;
-                <LoginButton color="secondary" onClick={() => setShowLogin(false)}>
+                <LoginButton onClick={() => setShowLogin(false)}>
                   Sign Up
                 </LoginButton>
               </p>
@@ -55,7 +60,7 @@ function Login({ onLogin }) {
               <Divider />
               <p>
                 Already have an account? &nbsp;
-              <LoginButton color="secondary" onClick={() => setShowLogin(true)}>
+              <LoginButton onClick={() => setShowLogin(true)}>
                 Log In
               </LoginButton>
               </p>
@@ -66,14 +71,5 @@ function Login({ onLogin }) {
     </LoginWrapper>
   );
 }
-
-
-
-
-const Divider = styled.hr`
-  border: none;
-  border-bottom: 1px solid #ccc;
-  margin: 16px 0;
-`;
 
 export default Login;

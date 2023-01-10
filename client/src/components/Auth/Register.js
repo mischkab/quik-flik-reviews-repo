@@ -1,5 +1,6 @@
 import { Error, Label } from '../../styles'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const SignUpWrapper = styled.div``
@@ -64,12 +65,14 @@ const FormField = styled.div`
   width: 100%;
 `
 
+
 function Register({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate()
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -89,6 +92,7 @@ function Register({ onLogin }) {
       setIsLoading(false);
       if (r.ok) {
         r.json().then((user) => onLogin(user));
+        navigate('/');
       } else {
         r.json().then((err) => setErrors(err.error));
       }
