@@ -1,5 +1,5 @@
 import { useEffect, useState, Fragment } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Header from './Header'
 import ReviewForm from './ReviewForm'
 import styled from 'styled-components'
@@ -30,7 +30,6 @@ const Movie = ({user}) => {
   const [loaded, setLoaded] = useState(false)
   const [errors, setErrors] = useState([])
   const {id} = useParams()
-  const navigate = useNavigate()
 
   useEffect(() => {
     fetch(`/movies/${id}`)
@@ -66,11 +65,16 @@ const Movie = ({user}) => {
       setLoaded(true)
       if (res.ok) {
         setReview({title: '', comment: '', rating: 0})
-        navigate(`/movies/${id}`)
       } else {
         res.json().then((err) => setErrors(err.errors))
       }
     })
+  }
+
+  const setRating = (rating, e) => {
+    e.preventDefault()
+
+    setReview ({...review, rating})
   }
 
   return (
@@ -95,6 +99,7 @@ const Movie = ({user}) => {
           <ReviewForm
             handleChange={handleChange}
             handleSubmit={handleSubmit}
+            setRating={setRating}
             title={movie.title}
             reviews={movie.reviews}
             review={review}
