@@ -1,5 +1,5 @@
 import { useEffect, useState, Fragment } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Header from './Header'
 import ReviewForm from './ReviewForm'
 import styled from 'styled-components'
@@ -24,11 +24,13 @@ const Main = styled.div`
 `
 
 
-const Movie = () => {
+const Movie = ({user}) => {
   const [movie, setMovie] = useState({})
   const [review, setReview] = useState({})
   const [loaded, setLoaded] = useState(false)
+  const [errors, setErrors] = useState([])
   const {id} = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetch(`/movies/${id}`)
@@ -43,19 +45,32 @@ const Movie = () => {
   const handleChange = (e) => {
     e.preventDefault()
 
-    setReview(Object.assign({}, review, {[e.target.name]: e.target.value}))
-
+    if (user) {
+      setReview(Object.assign({}, review, {[e.target.name]: e.target.value, user_id : user.id, movie_id: movie.id}))
+    }
+    
     console.log('review:', review)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setLoaded(false)
 
-    // post(`/movies/${id}/reviews`, {review})
-    // .then(res => {
-    //   debugger
-    // })
-    // .catch(res => {})
+    fetch(`/movies/${id}/reviews`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(review)
+    }).then(res => {
+      setLoaded(true)
+      if (res.ok) {
+        setReview({title: '', comment: '', rating: 0})
+        navigate(`/movies/${id}`)
+      } else {
+        res.json().then((err) => setErrors(err.errors))
+      }
+    })
   }
 
   return (
@@ -83,6 +98,8 @@ const Movie = () => {
             title={movie.title}
             reviews={movie.reviews}
             review={review}
+            user={user}
+            errors={errors}
           />
         </Column>
       </Fragment>
