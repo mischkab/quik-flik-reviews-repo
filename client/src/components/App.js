@@ -26,7 +26,7 @@ function App() {
       <Routes>
         <Route exact path='/' element={<Movies />}></Route>
         <Route exact path='/new' element={<MovieForm />}></Route>
-        <Route exact path='/movies/:id' element={<Movie />}></Route>
+        <Route exact path='/movies/:id' element={<Movie user={user} />}></Route>
         <Route exact path='/register' element={<Register onLogin={setUser} />}></Route>
         <Route exact path='/login' element={<Login onLogin={setUser} />}></Route>
       </Routes>
