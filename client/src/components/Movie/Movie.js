@@ -1,7 +1,8 @@
 import { useEffect, useState, Fragment } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Header from './Header'
 import ReviewForm from './ReviewForm'
+import Review from './Review'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
@@ -27,16 +28,31 @@ const Main = styled.div`
 const Movie = ({user}) => {
   const [movie, setMovie] = useState({})
   const [review, setReview] = useState({})
+  const [reviews, setReviews] = useState([])
   const [loaded, setLoaded] = useState(false)
   const [errors, setErrors] = useState([])
   const {id} = useParams()
+  const navigate = useNavigate()
 
+
+  // fetch movie information by movie_id
   useEffect(() => {
     fetch(`/movies/${id}`)
     .then(res => res.json())
     .then(res => {
       setMovie(res)
       setLoaded(true)
+    })
+    .catch(res => console.log(res))
+  }, [id])
+
+  // fetch movie reviews by movie_id
+  useEffect(() => {
+    fetch(`/movies/${id}/reviews`)
+    .then(res => res.json())
+    .then(res => {
+      setReviews(res)
+      console.log(res)
     })
     .catch(res => console.log(res))
   }, [id])
@@ -51,6 +67,7 @@ const Movie = ({user}) => {
     console.log('review:', review)
   }
 
+  // Handle review submit
   const handleSubmit = (e) => {
     e.preventDefault()
     setLoaded(false)
@@ -65,12 +82,14 @@ const Movie = ({user}) => {
       setLoaded(true)
       if (res.ok) {
         setReview({title: '', comment: '', rating: 0})
+        navigate(0)
       } else {
         res.json().then((err) => setErrors(err.errors))
       }
     })
   }
 
+  // set review rating
   const setRating = (rating, e) => {
     e.preventDefault()
 
@@ -92,7 +111,18 @@ const Movie = ({user}) => {
               image={movie.image}
               reviews={movie.reviews}
               />
-            <div className='reviews'></div>
+            <div className='reviews'>
+              {reviews && reviews.map((r) => (
+                <Review
+                  key={r.id}
+                  id={r.id}
+                  title={r.title}
+                  comment={r.comment}
+                  rating={r.rating}
+                  user={r.user}
+                />
+              ))}
+            </div>
           </Main>
         </Column>
         <Column>
@@ -105,6 +135,7 @@ const Movie = ({user}) => {
             review={review}
             user={user}
             errors={errors}
+            total={movie.reviews}
           />
         </Column>
       </Fragment>
