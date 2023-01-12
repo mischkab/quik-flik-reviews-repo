@@ -1,5 +1,6 @@
 // import { Error } from '../../styles'
 import styled from 'styled-components'
+import { Fragment } from 'react'
 
 const RatingContainer = styled.div`
   text-align: center;
@@ -117,10 +118,10 @@ const Error = styled.div`
 const ReviewForm = (props) => {
   const ratingOptions = [5,4,3,2,1].map( (rating, index) => {
     return (
-      <>
+      <Fragment key={index}>
         <input type='radio' value={rating} checked={props.review.rating === rating} name='rating' onChange={() => console.log('selected:', rating)} id={`rating-${rating}`}/>
         <label onClick={props.setRating.bind(this, rating)}></label>
-      </>
+      </Fragment>
     )
   })
 
