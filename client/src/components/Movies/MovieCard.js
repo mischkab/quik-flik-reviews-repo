@@ -49,7 +49,7 @@ const MovieCard = (movie) => {
         <img src={movie.image} alt={movie.title}/>
       </MoviePoster>
       <MovieTitle>{movie.title}</MovieTitle>
-      <MovieDirector>{movie.director}</MovieDirector>
+      <MovieDirector>Director: {movie.director}</MovieDirector>
       <MovieLink>
         <Link to={`/movies/${movie.id}`}>View Movie</Link>
       </MovieLink>
