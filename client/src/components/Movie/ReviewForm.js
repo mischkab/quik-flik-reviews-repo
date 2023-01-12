@@ -83,7 +83,7 @@ const SubmitBtn = styled.button`
 `
 
 const ReviewWrapper = styled.div`
-  background:white;
+  background: white;
   padding:20px;
   margin-left: 15px;
   border-radius: 0;
