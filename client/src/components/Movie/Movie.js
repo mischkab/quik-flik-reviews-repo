@@ -131,7 +131,6 @@ const Movie = ({user}) => {
             handleSubmit={handleSubmit}
             setRating={setRating}
             title={movie.title}
-            reviews={movie.reviews}
             review={review}
             user={user}
             errors={errors}
