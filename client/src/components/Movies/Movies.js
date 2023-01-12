@@ -12,7 +12,7 @@ const Header = styled.div`
   padding: 50px 100px 10px 100px;
 
   h1 {
-    font-size: 42px;
+    font-size: 50px;
   }
 `
 const Subheader = styled.div`
