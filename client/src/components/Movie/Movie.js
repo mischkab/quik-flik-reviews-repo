@@ -52,7 +52,7 @@ const Movie = ({user}) => {
     .then(res => res.json())
     .then(res => {
       setReviews(res)
-      console.log(res)
+      setLoaded(true)
     })
     .catch(res => console.log(res))
   }, [id])
@@ -110,6 +110,7 @@ const Movie = ({user}) => {
               director={movie.director}
               image={movie.image}
               reviews={movie.reviews}
+              rating={movie.average_rating}
               />
             <div className='reviews'>
               {reviews && reviews.map((r) => (

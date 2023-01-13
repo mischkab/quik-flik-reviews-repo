@@ -56,7 +56,7 @@ const Header = (m) => {
       <Overview>{m.overview}</Overview>
       <div>
         <TotalReviews>{total} {total === 1? 'User Review' : 'User Reviews'}</TotalReviews>
-        <TotalOutOf>avg out of 5</TotalOutOf>
+        <TotalOutOf>{m.rating} out of 5</TotalOutOf>
       </div>
     </Wrapper>
   )
