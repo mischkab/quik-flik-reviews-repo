@@ -29,7 +29,11 @@ const OverviewTitle = styled.div`
   font-weight: bold;
 `
 const Overview = styled.div`
-  font-size: 18px;
+  font-size: 16px;
+  line-height: 1.6;
+`
+const ReviewInfoWrapper = styled.div`
+  margin-bottom: -20px;
 `
 
 const TotalReviews = styled.div`
@@ -54,10 +58,10 @@ const Header = (m) => {
       <MovieDirector>Director: {m.director}</MovieDirector>
       <OverviewTitle>Overview</OverviewTitle>
       <Overview>{m.overview}</Overview>
-      <div>
+      <ReviewInfoWrapper>
         <TotalReviews>{total} {total === 1? 'User Review' : 'User Reviews'}</TotalReviews>
-        <TotalOutOf>{m.rating} out of 5</TotalOutOf>
-      </div>
+        <TotalOutOf>{m.rating} out of 5 stars</TotalOutOf>
+      </ReviewInfoWrapper>
     </Wrapper>
   )
 }
