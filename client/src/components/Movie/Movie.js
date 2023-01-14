@@ -52,7 +52,6 @@ const Movie = ({user}) => {
     .then(res => res.json())
     .then(res => {
       setReviews(res)
-      setLoaded(true)
     })
     .catch(res => console.log(res))
   }, [id])
@@ -70,7 +69,6 @@ const Movie = ({user}) => {
   // Handle review submit
   const handleSubmit = (e) => {
     e.preventDefault()
-    setLoaded(false)
 
     fetch(`/movies/${id}/reviews`, {
       method: 'POST',
@@ -79,7 +77,6 @@ const Movie = ({user}) => {
       },
       body: JSON.stringify(review)
     }).then(res => {
-      setLoaded(true)
       if (res.ok) {
         setReview({title: '', comment: '', rating: 0})
         navigate(0)
@@ -95,6 +92,13 @@ const Movie = ({user}) => {
 
     setReview ({...review, rating})
   }
+
+  // destroy a review
+  // const handleDestroy = (review_id, e) => {
+  //   e.preventDefault()
+
+  //   fetch(`movies/${id}/reviews/${review_id}`).then
+  // }
 
   return (
   <Wrapper>
