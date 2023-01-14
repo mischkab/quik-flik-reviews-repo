@@ -33,6 +33,25 @@ const Author = styled.div`
   margin: 0 8px;
   color: #19408a;
 `
+const ButtonWrapper = styled.div`
+  position: absolute;
+  right: 15px;
+  top: 15px;
+`
+const Icon = styled.button`
+  box-shadow: none;
+  border-radius: 4px;
+  margin: 0 4px;
+  cursor: pointer;
+
+  i {
+    font-size: 18px;
+  }
+
+  &:hover {
+    background: #9f9f9f;
+  }
+`
 
 const Review = (props) => {
   const id = useParams().id
@@ -57,7 +76,14 @@ const Review = (props) => {
       <Title>{props.title}</Title>
       <Comment>{props.comment}</Comment>
       <Author>{props.user.username}</Author>
-      <button onClick={handleDeleteReview}>Delete Review</button>
+      {
+        props.currentUser && props.user.username === props.currentUser.username &&
+        <ButtonWrapper>
+          <Icon onClick={handleDeleteReview}>
+            <i className='fa fa-trash'></i>
+          </Icon>
+        </ButtonWrapper>
+      }
     </Card>
   )
 }
