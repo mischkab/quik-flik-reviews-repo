@@ -34,7 +34,6 @@ const Movie = ({user}) => {
   const {id} = useParams()
   const navigate = useNavigate()
 
-
   // fetch movie information by movie_id
   useEffect(() => {
     fetch(`/movies/${id}`)
@@ -52,6 +51,7 @@ const Movie = ({user}) => {
     .then(res => res.json())
     .then(res => {
       setReviews(res)
+      setLoaded(true)
     })
     .catch(res => console.log(res))
   }, [id])
@@ -94,11 +94,11 @@ const Movie = ({user}) => {
   }
 
   // destroy a review
-  // const handleDestroy = (review_id, e) => {
-  //   e.preventDefault()
-
-  //   fetch(`movies/${id}/reviews/${review_id}`).then
-  // }
+ function handleDeleteReview(deletedReview) {
+    setReviews((reviews) =>
+      reviews.filter((review) => review.id !== deletedReview.id)
+    );
+  }
 
   return (
   <Wrapper>
@@ -125,6 +125,8 @@ const Movie = ({user}) => {
                   comment={r.comment}
                   rating={r.rating}
                   user={r.user}
+                  onDeleteReview={handleDeleteReview}
+                  review={r}
                 />
               ))}
             </div>

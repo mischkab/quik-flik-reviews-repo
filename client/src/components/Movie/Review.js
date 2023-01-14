@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Rating from '../Rating/Rating'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const Card = styled.div`
   border: 1px solid #E6E6E6;
@@ -34,6 +35,20 @@ const Author = styled.div`
 `
 
 const Review = (props) => {
+  const id = useParams().id
+  const navigate = useNavigate()
+
+  function handleDeleteReview() {
+    fetch(`/movies/${id}/reviews/${props.id}`, {
+      method: "DELETE",
+    }).then((r) => {
+      if (r.ok) {
+        props.onDeleteReview(props.review);
+        navigate(0)
+      }
+    });
+  }
+
   return (
     <Card>
       <RatingContainer>
@@ -42,6 +57,7 @@ const Review = (props) => {
       <Title>{props.title}</Title>
       <Comment>{props.comment}</Comment>
       <Author>{props.user.username}</Author>
+      <button onClick={handleDeleteReview}>Delete Review</button>
     </Card>
   )
 }
