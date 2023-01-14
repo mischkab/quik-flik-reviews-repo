@@ -51,7 +51,6 @@ const Movie = ({user}) => {
     .then(res => res.json())
     .then(res => {
       setReviews(res)
-      setLoaded(true)
     })
     .catch(res => console.log(res))
   }, [id])
@@ -127,6 +126,7 @@ const Movie = ({user}) => {
                   user={r.user}
                   onDeleteReview={handleDeleteReview}
                   review={r}
+                  currentUser={user}
                 />
               ))}
             </div>
