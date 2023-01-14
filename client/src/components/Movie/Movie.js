@@ -61,8 +61,6 @@ const Movie = ({user}) => {
     if (user) {
       setReview(Object.assign({}, review, {[e.target.name]: e.target.value, user_id : user.id, movie_id: movie.id}))
     }
-    
-    console.log('review:', review)
   }
 
   // Handle review submit
@@ -80,7 +78,11 @@ const Movie = ({user}) => {
         setReview({title: '', comment: '', rating: 0})
         navigate(0)
       } else {
-        res.json().then((err) => setErrors(err.errors))
+        if (user) {
+          res.json().then((err) => setErrors(err.error))
+        } else {
+          setErrors(['Please log in to leave a review.'])
+        }
       }
     })
   }

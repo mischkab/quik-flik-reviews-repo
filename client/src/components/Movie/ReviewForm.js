@@ -1,4 +1,4 @@
-// import { Error } from '../../styles'
+import { Error } from '../../styles'
 import styled from 'styled-components'
 import { Fragment } from 'react'
 
@@ -106,15 +106,7 @@ const RatingTitle = styled.div`
   padding-bottom: 20px;
   font-weight: bold;
 `
-const Error = styled.div`
-  width: 100%;
-  color: rgb(255, 80, 44);
-  border: 1px solid rgb(255, 80, 44);
-  border-radius: 4px;
-  margin-top: 8px;
-  text-align:center;
-  padding: 4px;
-`
+
 const ReviewForm = (props) => {
   const ratingOptions = [5,4,3,2,1].map( (rating, index) => {
     return (
