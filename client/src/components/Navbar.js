@@ -47,6 +47,7 @@ const Menu = styled.ul`
 `
 
 const Logo = styled.span`
+  margin-left: 18px;
   font-weight: bold;
   font-size: 20px;
   a {
